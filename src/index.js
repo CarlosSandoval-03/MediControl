@@ -42,6 +42,8 @@ app.use(require("./routes/index"));
 app.use(require("./routes/authentication"));
 app.use("/user", require("./routes/patient"));
 app.use("/user", require("./routes/doctor"));
+app.use(require("./routes/ticket"));
+app.use(require("./routes/appointment"));
 
 // Start Server
 app.listen(app.get("port"), () => {
