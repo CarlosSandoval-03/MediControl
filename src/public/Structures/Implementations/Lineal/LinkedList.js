@@ -1,10 +1,4 @@
-class Node {
-	constructor(data) {
-		this.data = data;
-		this.next = null;
-		this.prev = null;
-	}
-}
+const LinealNode = require("./LinealNode");
 
 class LinkedList {
 	static consoleErrorEmpty = () => {
@@ -31,11 +25,12 @@ class LinkedList {
 				node = node.next;
 			}
 		}
-		console.log(elements);
+		// console.log(elements); // DEBUG
+		return `[${elements.join(", ")}]`;
 	}
 
 	pushFront(data) {
-		let node = new Node(data);
+		let node = new LinealNode(data);
 		node.next = this.head;
 		this.head = node;
 
@@ -66,7 +61,7 @@ class LinkedList {
 	}
 
 	pushBack(data) {
-		let node = new Node(data);
+		let node = new LinealNode(data);
 		if (this.tail === null) {
 			this.tail = node;
 			this.head = this.tail;
@@ -111,7 +106,7 @@ class LinkedList {
 		return -1;
 	}
 
-	exits(data) {
+	exists(data) {
 		return this.findIndex(data) !== -1;
 	}
 
@@ -161,7 +156,7 @@ class LinkedList {
 	}
 
 	addBefore(node, data) {
-		let auxNode = new Node(data);
+		let auxNode = new LinealNode(data);
 		auxNode.next = node;
 		auxNode.prev = node.prev;
 		node.prev = auxNode;
@@ -176,7 +171,7 @@ class LinkedList {
 	}
 
 	addAfter(node, data) {
-		let auxNode = new Node(data);
+		let auxNode = new LinealNode(data);
 		auxNode.next = node.next;
 		auxNode.prev = node;
 		node.next = auxNode;
@@ -191,76 +186,4 @@ class LinkedList {
 	}
 }
 
-class Queue {
-	constructor() {
-		this.list = new LinkedList();
-		this.size = this.list.size;
-	}
-
-	print() {
-		this.list.print();
-	}
-
-	isEmpty() {
-		return this.list.isEmpty();
-	}
-
-	updateSize() {
-		this.size = this.list.size;
-	}
-
-	enqueue(data) {
-		this.list.pushBack(data);
-		this.updateSize();
-	}
-
-	top() {
-		return this.list.topFront();
-	}
-
-	dequeue() {
-		let auxValue = this.top();
-		this.list.popFront();
-
-		this.updateSize();
-
-		return auxValue;
-	}
-}
-
-class Stack {
-	constructor() {
-		this.list = new LinkedList();
-		this.size = this.list.size;
-	}
-
-	print() {
-		this.list.print();
-	}
-
-	isEmpty() {
-		return this.list.isEmpty();
-	}
-
-	updateSize() {
-		this.size = this.list.size;
-	}
-
-	push(data) {
-		this.list.pushBack(data);
-		this.updateSize();
-	}
-
-	top() {
-		return this.list.topBack();
-	}
-
-	pop() {
-		let auxValue = this.top();
-		this.list.popBack();
-
-		this.updateSize();
-
-		return auxValue;
-	}
-}
+module.exports = LinkedList;
