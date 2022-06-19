@@ -112,8 +112,7 @@ class LinkedList {
 
 	getNode(index) {
 		if (index >= this.size || index < 0) {
-			console.error("INVALID POSITION");
-			return undefined;
+			throw new Error("INVALID POSITION");
 		}
 
 		let node = this.head;
@@ -136,12 +135,16 @@ class LinkedList {
 			}
 			node = node.next;
 		}
-		console.error("NOT EXISTING DATA");
+		throw new Error("NOT EXISTING DATA");
 	}
 
 	remove(index) {
 		if (index >= this.size || index < 0) {
-			console.error("INVALID POSITION");
+			throw new Error("INVALID POSITION");
+		}
+
+		if (index === this.size - 1) {
+			this.popBack();
 			return;
 		}
 
@@ -156,6 +159,10 @@ class LinkedList {
 	}
 
 	addBefore(node, data) {
+		if (!(node instanceof LinealNode)) {
+			throw new Error("INVALID NODE");
+		}
+
 		let auxNode = new LinealNode(data);
 		auxNode.next = node;
 		auxNode.prev = node.prev;
@@ -168,9 +175,14 @@ class LinkedList {
 		if (this.head === node) {
 			this.head = auxNode;
 		}
+		this.size++;
 	}
 
 	addAfter(node, data) {
+		if (!(node instanceof LinealNode)) {
+			throw new Error("INVALID NODE");
+		}
+
 		let auxNode = new LinealNode(data);
 		auxNode.next = node.next;
 		auxNode.prev = node;
@@ -183,6 +195,7 @@ class LinkedList {
 		if (this.tail === node) {
 			this.tail = auxNode;
 		}
+		this.size++;
 	}
 }
 
