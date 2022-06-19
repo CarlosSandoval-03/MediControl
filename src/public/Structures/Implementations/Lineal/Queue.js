@@ -1,4 +1,3 @@
-// const LinealNode = require("./LinealNode");
 const LinkedList = require("./LinkedList");
 
 class Queue {
@@ -8,20 +7,20 @@ class Queue {
 	}
 
 	print() {
-		this.list.print();
+		return this.list.print();
 	}
 
 	isEmpty() {
 		return this.list.isEmpty();
 	}
 
-	updateSize() {
+	_updateSize() {
 		this.size = this.list.size;
 	}
 
 	enqueue(data) {
 		this.list.pushBack(data);
-		this.updateSize();
+		this._updateSize();
 	}
 
 	top() {
@@ -32,7 +31,7 @@ class Queue {
 		let auxValue = this.top();
 		this.list.popFront();
 
-		this.updateSize();
+		this._updateSize();
 
 		return auxValue;
 	}
