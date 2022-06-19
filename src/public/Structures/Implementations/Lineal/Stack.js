@@ -1,4 +1,3 @@
-// const LinealNode = require("./LinealNode");
 const LinkedList = require("./LinkedList");
 
 class Stack {
@@ -8,20 +7,20 @@ class Stack {
 	}
 
 	print() {
-		this.list.print();
+		return this.list.print();
 	}
 
 	isEmpty() {
 		return this.list.isEmpty();
 	}
 
-	updateSize() {
+	_updateSize() {
 		this.size = this.list.size;
 	}
 
 	push(data) {
 		this.list.pushBack(data);
-		this.updateSize();
+		this._updateSize();
 	}
 
 	top() {
@@ -32,7 +31,7 @@ class Stack {
 		let auxValue = this.top();
 		this.list.popBack();
 
-		this.updateSize();
+		this._updateSize();
 
 		return auxValue;
 	}
