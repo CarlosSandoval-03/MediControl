@@ -1,4 +1,4 @@
-const { BSTNode } = require("./TreeNodes");
+const Node = require("./Node");
 const Queue = require("../../Implementations/Lineal/Queue");
 
 class BST {
@@ -57,7 +57,7 @@ class BST {
 
 	_insertNode(data, node) {
 		if (node === null) {
-			return new BSTNode(data);
+			return new Node(data);
 		}
 
 		let compareResult = this.compareTo(data, node.data);

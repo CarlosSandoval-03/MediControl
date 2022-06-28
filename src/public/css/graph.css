@@ -1,0 +1,88 @@
+:root {
+	--main-page-background-color: black;
+	--canva-background-color: rgb(0, 255, 0);
+	--controller-background-color: #310047;
+	--input-border-color: #333;
+	--warning-color: red;
+}
+
+#spaceGraph{
+	margin: 0;
+	padding: 0;
+	font-size: 10px;
+	background-color: var(--main-page-background-color);
+	min-height: 100vh;
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif';
+}
+
+#mainView {
+	background-color: var(--canva-background-color);
+	display: flex;
+	justify-content: center;
+}
+
+#controller {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+	height: auto;
+
+	background-color: var(--controller-background-color);
+}
+
+#controller button {
+	font-size: 1.5em;
+	border-radius: 0.9em;
+	padding: 2em;
+}
+
+#universe-photo {
+	width: 600px;
+	height: auto;
+}
+
+canvas {
+	width: 100%;
+	height: auto;
+}
+
+dialog::backdrop {
+	position: fixed;
+	inset: 0;
+	background: #0006;
+	backdrop-filter: blur(10px);
+}
+
+#create-window::after{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#form-create p {
+	font-size: 60px;
+}
+
+#form-create {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 10px;
+}
+
+
+.create-input {
+	margin: 0 0.5rem;
+	padding: 0.7rem;
+	border: 1px solid var(--input-border-color);
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	font-size: 3rem;
+}
+
+#name-universe {
+	color: var(--warning-color)
+}
