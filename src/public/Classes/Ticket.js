@@ -1,12 +1,10 @@
 class Ticket {
-	constructor({ id, idPatient, departament, priorityValue }) {
+	constructor({ id, idPatient, dateCreation, departament, priorityValue }) {
 		this.id = id;
-		this.documentPatient = idPatient;
+		this.idPatient = idPatient;
+		this.dateCreation = dateCreation;
 		this.departament = departament;
-
-		if (departament === "urgencias") {
-			this.priorityValue = priorityValue;
-		}
+		this.priorityValue = priorityValue;
 	}
 }
 

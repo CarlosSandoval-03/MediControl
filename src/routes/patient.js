@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const getTickets = require("../Modules/crudTickets");
+const { getTickets } = require("../Modules/crudTickets");
+const { saveData } = require("../public/js/ticketsTable");
 
 const pool = require("../database");
 
 router.get("/", async (req, res) => {
-	// Get the data to print
 	const tickets = await getTickets("756.9728.0972.58", pool);
-	console.log(tickets);
 
-	res.render("user/patient/mainView", { tickets });
+	const stackTickets = saveData(tickets);
+
+	res.render("user/patient/mainView", { stack: stackTickets });
 });
 
 router.get("/newTicket", (req, res) => {
@@ -36,6 +37,15 @@ router.get("/deleteTickets/:id", async (req, res) => {
 	const { id } = req.params;
 	await pool.query("DELETE FROM tickets WHERE id_ticket=?", [id]);
 	res.redirect("/user/");
+});
+
+router.get("/newAppointment", (req, res) => {
+	res.render("user/patient/appointment/generateAppointment");
+});
+
+router.post("/createAppointment", async (req, res) => {
+	console.log(req.body);
+	res.send("CREADO");
 });
 
 module.exports = router;

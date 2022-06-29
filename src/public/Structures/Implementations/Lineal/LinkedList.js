@@ -25,7 +25,6 @@ class LinkedList {
 				node = node.next;
 			}
 		}
-		// console.log(elements); // DEBUG
 		return `[${elements.join(", ")}]`;
 	}
 
