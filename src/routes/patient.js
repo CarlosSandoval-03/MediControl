@@ -6,7 +6,7 @@ const Patient = require("../public/Classes/Patient");
 const pool = require("../database");
 const e = require("connect-flash");
 
-router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
 	res.render("user/patient/mainView");
 });
 
