@@ -13,7 +13,9 @@ helpers.capitalizeText = (string) => {
 helpers.renderTableTickets = (stackTickets) => {
 	let content = "";
 
-	for (let i = 0; i < stackTickets.size; i++) {
+	let size = stackTickets.size;
+
+	for (let i = 0; i < size; i++) {
 		let ticket = stackTickets.pop();
 
 		let table = `<tr style="background: #262a38;">
@@ -35,7 +37,7 @@ helpers.renderTableTickets = (stackTickets) => {
 		</td>
 	</tr>`;
 
-		content += table + "\n";
+		content += table + " ";
 	}
 
 	return content;
