@@ -1,4 +1,4 @@
-<div>
+<div id="mainViewContent">
 	<nav class="navbar navbar-dark navbar-expand bg-dark sb-topnav">
 		<div class="container-fluid">
 			<button
@@ -49,9 +49,9 @@
 							<div class="sb-sidenav-menu-heading">
 								<span>Administre su perfil</span>
 							</div>
-							<a class="nav-link active" href="/user/">
+							<a class="nav-link collapsed" href="/user/">
 								<div class="sb-nav-link-icon">
-									<i class="fa fa-dashboard"></i>
+									<i class="fa fa-desktop"></i>
 								</div>
 								<span>Dashboard</span>
 							</a>
@@ -60,6 +60,14 @@
 							<div class="sb-sidenav-menu-heading">
 								<span>Administre sus servicios</span>
 							</div>
+							<div>
+							<a class="nav-link collapsed" href="/user/newTicket">
+								<div class="sb-nav-link-icon">
+									<i class="fa fa-ticket"></i>
+								</div>
+								<span>Solicitar Turno</span>
+							</a>
+						</div>
 							<a
 								class="nav-link collapsed"
 								href="#"
@@ -69,7 +77,7 @@
 								data-bs-target="#collapseAppointments"
 							>
 								<div class="sb-nav-link-icon">
-									<i class="fa fa-dashboard"></i>
+									<i class="fa fa-calendar-check"></i>
 								</div>
 								<span>Citas</span>
 								<div class="sb-sidenav-collapse-arrow">
@@ -98,7 +106,7 @@
 								data-bs-target="#collapseMedicaments"
 							>
 								<div class="sb-nav-link-icon">
-									<i class="fa fa-dashboard"></i>
+									<i class="fa fa-medkit"></i>
 								</div>
 								<span>Medicamentos</span>
 								<div class="sb-sidenav-collapse-arrow">

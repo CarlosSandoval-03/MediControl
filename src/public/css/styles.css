@@ -1,0 +1,7 @@
+:root {
+	--main-page-background-color: black;
+}
+
+#mainViewContent {
+	background-color: var(--main-page-background-color);
+}

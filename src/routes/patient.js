@@ -1,20 +1,22 @@
 const express = require("express");
 const router = express.Router();
 
-const Patient = require("../public/Classes/Patient");
+const getTickets = require("../Modules/crudTickets");
 
 const pool = require("../database");
-const e = require("connect-flash");
 
-router.get("/", (req, res) => {
-	res.render("user/patient/mainView");
+router.get("/", async (req, res) => {
+	// Get the data to print
+	const tickets = await getTickets("756.9728.0972.58", pool);
+	console.log(tickets);
+
+	res.render("user/patient/mainView", { tickets });
 });
 
 router.get("/newTicket", (req, res) => {
 	res.render("user/patient/ticket/generateTicket");
 });
 
-// Create a new Ticket
 router.post("/createTicket", async (req, res) => {
 	const { id_value, departament } = req.body;
 
@@ -27,7 +29,13 @@ router.post("/createTicket", async (req, res) => {
 		priority_value: priority,
 	};
 	await pool.query("INSERT INTO tickets set ?", [newTicket]);
-	res.send("Ticket Created");
+	res.redirect("/user/");
+});
+
+router.get("/deleteTickets/:id", async (req, res) => {
+	const { id } = req.params;
+	await pool.query("DELETE FROM tickets WHERE id_ticket=?", [id]);
+	res.redirect("/user/");
 });
 
 module.exports = router;
