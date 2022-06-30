@@ -104,8 +104,15 @@ router.get("/selectHour", async (req, res) => {
 	});
 });
 
-router.post("/createAppointment", (req, res) => {
-	console.log(req.body);
+router.post("/createAppointment", async (req, res) => {
+	let newAppointment = {
+		user_doctor: req.body.doctor,
+		id_doc_patient: req.body.id_value,
+		start_time: req.body.date + " " + req.body.hour + ":00",
+	};
+
+	await pool.query("INSERT INTO appointments set ?", [newAppointment]);
+
 	res.redirect("/user/");
 });
 
