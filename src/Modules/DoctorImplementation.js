@@ -15,6 +15,14 @@ const getDoctorsWithDepartament = async (departament, pool) => {
 	return doctors;
 };
 
+const getDoctorWithUsername = async (username, pool) => {
+	const doctor = await pool.query("SELECT * FROM doctors WHERE username=?", [
+		username,
+	]);
+
+	return doctor;
+};
+
 const saveDataDoctors = (doctors) => {
 	let list = new LinkedList();
 
@@ -39,4 +47,5 @@ module.exports = {
 	getDoctorsWithDepartament,
 	getAllDoctors,
 	saveDataDoctors,
+	getDoctorWithUsername,
 };

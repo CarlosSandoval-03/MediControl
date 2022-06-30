@@ -20,11 +20,11 @@ class Appointment {
 	}
 
 	getStartTime() {
-		return format(this._startTime, "DD/MM [at] HH:mm");
+		return format(this._startTime, "HH:mm");
 	}
 
 	getEndTime() {
-		return format(this._endTime, "DD/MM [at] HH:mm");
+		return format(this._endTime, "DD/MM/YYYY [at] HH:mm");
 	}
 
 	setEndTime(endDateTime) {

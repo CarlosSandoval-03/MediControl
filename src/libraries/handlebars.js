@@ -1,5 +1,6 @@
 const { format } = require("timeago.js");
 const Queue = require("../public/Structures/Implementations/Lineal/Queue");
+const LinkedList = require("../public/Structures/Implementations/Lineal/LinkedList");
 
 const helpers = {};
 
@@ -65,6 +66,20 @@ helpers.createOptionsDoctors = (listDoctors) => {
 			.getName()
 			.trim()}</option>`;
 		content += option + " ";
+	}
+	return content;
+};
+
+helpers.createHourSlots = (listHours) => {
+	let content = "";
+	let size = listHours.size;
+
+	for (let i = 0; i < size; i++) {
+		let hour = listHours.topFront();
+		let option = `<option value="${hour}">${hour}</option>`;
+		content += option + " ";
+
+		listHours.popFront();
 	}
 	return content;
 };

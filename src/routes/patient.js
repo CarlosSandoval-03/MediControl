@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { format } = require("fecha");
 
 const {
 	getTickets,
@@ -9,11 +10,14 @@ const {
 const {
 	saveDataDoctors,
 	getDoctorsWithDepartament,
+	getDoctorWithUsername,
 } = require("../Modules/DoctorImplementation");
 
 const {
 	getAllAppointmentsWithDoctor,
 	saveDataAppointments,
+	generateAllTimeSlots,
+	generateValidHours,
 } = require("../Modules/AppointmentQuerys");
 
 const pool = require("../database");
@@ -71,22 +75,37 @@ router.get("/selectDoctor", async (req, res) => {
 });
 
 router.post("/selectDoctor", (req, res) => {
-	res.redirect("/user/selectHour/?doctor=" + req.body.doctor);
+	res.redirect(
+		"/user/selectHour/?doctor=" + req.body.doctor + "&date=" + req.body.date
+	);
 });
 
 router.get("/selectHour", async (req, res) => {
-	// Calcular horas libres
-	const { doctor } = req.query;
+	const doctor = req.query.doctor;
+	const date = req.query.date;
+
+	let doctorInfo = await getDoctorWithUsername(doctor, pool);
+	doctorInfo = doctorInfo[0];
+
 	const doctorAppointments = await getAllAppointmentsWithDoctor(doctor, pool);
 
-	const AVLAppointments = saveDataAppointments(doctorAppointments);
-	console.log(AVLAppointments.printDates());
+	const appointmentsDaySelected = doctorAppointments.filter((appointment) => {
+		return format(appointment.start_time, "YYYY-MM-DD") === date;
+	});
 
-	res.send("Crear cita " + req.query.doctor);
+	const AVLAppointments = saveDataAppointments(appointmentsDaySelected);
+
+	const queueHours = generateAllTimeSlots();
+	const listHoursFiltered = generateValidHours(AVLAppointments, queueHours);
+
+	res.render("user/patient/appointment/createAppointment", {
+		doctorInfo,
+		listHoursFiltered,
+	});
 });
 
 router.post("/createAppointment", (req, res) => {
-	// console.log(req.body);
+	console.log(req.body);
 	res.redirect("/user/");
 });
 
