@@ -1,4 +1,4 @@
-const BinaryHeap = require("../Structures/Implementations/PriorityQueue/BinaryHeap");
+const AVL = require("../Structures/Implementations/Trees/AVL");
 const Appointment = require("./Appointment");
 
 class Doctor {
@@ -18,7 +18,7 @@ class Doctor {
 		this._password = password;
 		this._email = email;
 		this._departament = departament;
-		this._appointments = new BinaryHeap();
+		this._appointments = new AVL();
 	}
 
 	getId() {

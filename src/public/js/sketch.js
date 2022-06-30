@@ -1,14 +1,16 @@
-let multiverseFile,
-	multiverse,
-	count = 1,
-	stateFocus = true;
+let stateFocus = true;
+
+let graph,
+	jsonValue,
+	count = 1;
 
 function preload() {
-	const URL = "/src/data/multiverseData.json";
-	let data = loadJSON(URL, () => {
-		multiverseFile = data;
-		multiverse = new Multiverse(multiverseFile);
-		multiverse.createTemplate(windowWidth, windowHeight / 1.2);
+	const URL = "/user/data/graph";
+
+	loadJSON(URL, (data) => {
+		jsonValue = data;
+		graph = new Graph(JSON.parse(jsonValue));
+		graph.generateGraph(windowWidth, windowHeight / 1.2);
 	});
 }
 
@@ -21,11 +23,13 @@ function setup() {
 
 function draw() {
 	background(225);
-	multiverse.draw(stateFocus);
+	graph.draw(stateFocus);
 
 	if (mouseIsPressed === true || count > 0) {
 		let info = document.getElementById("info-universe");
-		info.innerHTML = `Universo: ${multiverse.selectedUniverse.name}`;
+		info.innerHTML = `Cita Seleccionada: ${
+			graph.selecNode.id_appointment ?? "No seleccionada"
+		}`;
 	}
 }
 

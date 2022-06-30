@@ -1,6 +1,9 @@
 const { format } = require("timeago.js");
 const Queue = require("../public/Structures/Implementations/Lineal/Queue");
-const LinkedList = require("../public/Structures/Implementations/Lineal/LinkedList");
+const Stack = require("../public/Structures/Implementations/Lineal/Stack");
+
+const Appointment = require("../public/Classes/Appointment");
+const Patient = require("../public/Classes/Patient");
 
 const helpers = {};
 
@@ -91,6 +94,11 @@ helpers.loadAppointmentFormScript = () => {
 helpers.getLocalStorage = () => {
 	return `${helpers.loadAppointmentFormScript()}
 	<script>getLocalStorage()</script>`;
+};
+
+helpers.loadCanvas = () => {
+	return `<script src="/js/sketch.js"></script>
+	<script src="/js/modal.js"></script>`;
 };
 
 module.exports = helpers;

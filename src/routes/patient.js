@@ -4,7 +4,9 @@ const { format } = require("fecha");
 
 const {
 	getTickets,
+	getPatientWithId,
 	saveDataTickets,
+	getAllAppointmentsWithId,
 } = require("../Modules/PatientImplementation");
 
 const {
@@ -15,20 +17,65 @@ const {
 
 const {
 	getAllAppointmentsWithDoctor,
-	saveDataAppointments,
 	generateAllTimeSlots,
 	generateValidHours,
+	saveDataAppointments,
 } = require("../Modules/AppointmentQuerys");
 
 const pool = require("../database");
 
 // Main Route
 router.get("/", async (req, res) => {
-	const tickets = await getTickets("756.9728.0972.58", pool);
+	const idPatient = "756.9728.0972.58";
 
+	const tickets = await getTickets(idPatient, pool);
 	const stackTickets = saveDataTickets(tickets);
 
-	res.render("user/patient/mainView", { stack: stackTickets });
+	res.render("user/patient/mainView", {
+		stack: stackTickets,
+	});
+});
+
+router.get("/data/graph", async (req, res) => {
+	const idPatient = "756.9728.0972.58";
+
+	const appointmets = await getAllAppointmentsWithId(idPatient, pool);
+	const patient = await getPatientWithId(idPatient, pool);
+
+	const temp = patient[0];
+
+	let data = {
+		patient: {
+			id_patient: temp.id_patient,
+			first_name: temp.first_name,
+			last_name: temp.last_name,
+			birt_date: temp.birt_date,
+			desc_patient: temp.desc_patient,
+			id_doc: temp.id_doc,
+			username: temp.username,
+			password: temp.password,
+			email: temp.email,
+			phone: temp.phone,
+		},
+	};
+
+	appointmets.forEach((appointmet) => {
+		const date = new Date(appointmet.start_time).toISOString().split("T");
+		data[`${date[0]}|${date[1].split(".")[0]}`] = {
+			id_appointment: appointmet.id_appointment,
+			user_doctor: appointmet.user_doctor,
+			id_doc_patient: appointmet.id_doc_patient,
+			start_time: appointmet.start_time,
+			end_time: appointmet.end_time,
+			description_appointment: appointmet.description_appointment,
+			state_appointment: appointmet.state_appointment,
+			cancellation_reason: appointmet.cancellation_reason,
+		};
+	});
+
+	const jsonFile = JSON.stringify(data);
+
+	res.json(jsonFile);
 });
 
 // Ticket
@@ -122,6 +169,18 @@ router.post("/createAppointment", async (req, res) => {
 router.get("/deleteAppointment/:id", async (req, res) => {
 	const { id } = req.params;
 	await pool.query("DELETE FROM appointments WHERE id_appointment=?", [id]);
+
+	res.redirect("/user/");
+});
+
+router.get("/cancelAppointment/:id", async (req, res) => {
+	const { id } = req.params;
+
+	await pool.query(
+		"UPDATE appointments SET state_appointment='cancelled' WHERE id_appointment=?",
+		[id]
+	);
+
 	res.redirect("/user/");
 });
 

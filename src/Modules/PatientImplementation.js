@@ -1,5 +1,6 @@
 const Stack = require("../public/Structures/Implementations/Lineal/Stack");
 const Ticket = require("../public/Classes/Ticket");
+const Appointment = require("../public/Classes/Appointment");
 
 const saveDataTickets = (tickets) => {
 	let stack = new Stack();
@@ -35,4 +36,18 @@ const getTickets = async (documentValuePatient, pool) => {
 	return tickets;
 };
 
-module.exports = { getTickets, getPatientWithId, saveDataTickets };
+const getAllAppointmentsWithId = async (id, pool) => {
+	const appointments = await pool.query(
+		"SELECT * FROM appointments WHERE id_doc_patient=?",
+		[id]
+	);
+
+	return appointments;
+};
+
+module.exports = {
+	getTickets,
+	getPatientWithId,
+	saveDataTickets,
+	getAllAppointmentsWithId,
+};
