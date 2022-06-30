@@ -1,5 +1,4 @@
 const AVL = require("../public/Structures/Implementations/Trees/AVL");
-const Queue = require("../public/Structures/Implementations/Lineal/Queue");
 const Appointment = require("../public/Classes/Appointment");
 const { format } = require("fecha");
 
