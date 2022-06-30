@@ -168,6 +168,31 @@ class AVL extends BST {
 			this._generalBalance();
 		}
 	}
+
+	printDates() {
+		if (this.isEmpty()) {
+			return "[]";
+		}
+
+		let queue = new Queue();
+		let auxNode;
+
+		let result = [];
+
+		queue.enqueue(this.root);
+		while (!queue.isEmpty()) {
+			auxNode = queue.dequeue();
+			result.push(auxNode.data.getStartTime());
+
+			if (auxNode.left !== null) {
+				queue.enqueue(auxNode.left);
+			}
+			if (auxNode.right !== null) {
+				queue.enqueue(auxNode.right);
+			}
+		}
+		return `[${result.join(", ")}]`;
+	}
 }
 
 module.exports = AVL;

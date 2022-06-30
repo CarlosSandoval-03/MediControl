@@ -1,6 +1,6 @@
 <div class="row register-form">
 	<div class="col-md-8 offset-md-2">
-		<form class="custom-form" action="/user/createAppointment" method="POST">
+		<form class="custom-form" action="/user/selectDoctor" method="POST">
 			<h1>Agenda tu cita</h1>
 			<div class="row form-group">
 				<div class="col-sm-4 label-column">
@@ -16,6 +16,29 @@
 						autofocus
 						required
 					/>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-sm-4 label-column">
+					<label class="col-form-label" for="dropdown-departament">Área de
+						especialidad
+					</label>
+				</div>
+				<div class="col-sm-4 input-column">
+					<div class="dropdown">
+						<select
+							name="departament"
+							id="dropdown-departament"
+							class="btn btn-light dropdown-toggle"
+						>
+							<option class="dropdown-item" value="medicina_general" selected>
+								Medicina General
+							</option>
+							<option class="dropdown-item" value="pediatria">
+								Pediatria
+							</option>
+						</select>
+					</div>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -36,29 +59,6 @@
 			</div>
 			<div class="row form-group">
 				<div class="col-sm-4 label-column">
-					<label class="col-form-label" for="dropdown-departament">Área de
-						especialidad
-					</label>
-				</div>
-				<div class="col-sm-4 input-column">
-					<div class="dropdown">
-						<select
-							name="departament"
-							id="dropdown-departament"
-							class="btn btn-light dropdown-toggle"
-						>
-							<option class="dropdown-item" value="medicina general" selected>
-								Medicina General
-							</option>
-							<option class="dropdown-item" value="pediatria">
-								pediatria
-							</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-sm-4 label-column">
 					<label class="col-form-label" for="dropdown-doctor">Doctor
 					</label>
 				</div>
@@ -69,12 +69,7 @@
 							id="dropdown-doctor"
 							class="btn btn-light dropdown-toggle"
 						>
-							<option class="dropdown-item" value="Doctor 1" selected>
-								Doctor 1
-							</option>
-							<option class="dropdown-item" value="Doctor 2">
-								Doctor 2
-							</option>
+							{{{createOptionsDoctors listDoctors}}}
 						</select>
 					</div>
 				</div>
@@ -112,3 +107,4 @@
 		</form>
 	</div>
 </div>
+{{{getLocalStorage}}}

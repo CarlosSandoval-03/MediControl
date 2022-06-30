@@ -1,4 +1,5 @@
 const { format } = require("timeago.js");
+const Queue = require("../public/Structures/Implementations/Lineal/Queue");
 
 const helpers = {};
 
@@ -41,6 +42,40 @@ helpers.renderTableTickets = (stackTickets) => {
 	}
 
 	return content;
+};
+
+helpers.createOptionsDoctors = (listDoctors) => {
+	let size = listDoctors.size;
+	let DoctorsDepartament = new Queue();
+
+	for (let i = 0; i < size; i++) {
+		let doctor = listDoctors.topBack();
+
+		DoctorsDepartament.enqueue(doctor);
+
+		listDoctors.popBack();
+	}
+
+	let content = "";
+	size = DoctorsDepartament.size;
+
+	for (let i = 0; i < size; i++) {
+		let doctor = DoctorsDepartament.dequeue();
+		let option = `<option value="${doctor.getUsername().trim()}">${doctor
+			.getName()
+			.trim()}</option>`;
+		content += option + " ";
+	}
+	return content;
+};
+
+helpers.loadAppointmentFormScript = () => {
+	return `<script src="/js/appointment.js"></script>`;
+};
+
+helpers.getLocalStorage = () => {
+	return `${helpers.loadAppointmentFormScript()}
+	<script>getLocalStorage()</script>`;
 };
 
 module.exports = helpers;

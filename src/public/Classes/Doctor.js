@@ -2,7 +2,15 @@ const BinaryHeap = require("../Structures/Implementations/PriorityQueue/BinaryHe
 const Appointment = require("./Appointment");
 
 class Doctor {
-	constructor(id, firstName, lastName, username, password, email, departament) {
+	constructor({
+		id,
+		firstName,
+		lastName,
+		username,
+		password,
+		email,
+		departament,
+	}) {
 		this._id = id;
 		this._firstName = firstName;
 		this._lastName = lastName;
@@ -11,6 +19,26 @@ class Doctor {
 		this._email = email;
 		this._departament = departament;
 		this._appointments = new BinaryHeap();
+	}
+
+	getId() {
+		return this._id;
+	}
+
+	getName() {
+		return this._firstName + " " + this._lastName;
+	}
+
+	getUsername() {
+		return this._username;
+	}
+
+	getEmail() {
+		return this._email;
+	}
+
+	getDepartament() {
+		return this._departament;
 	}
 
 	addAppointment({ patient, startDate }) {

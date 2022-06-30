@@ -1,28 +1,30 @@
+const { format } = require("fecha");
+
 class Appointment {
-	constructor(idDoctor, idPatient, date) {
-		this._idDoctor = idDoctor;
-		this._idPatient = idPatient;
-		this._startTime = date;
+	constructor({ user_doctor, id_doc_patient, start_time }) {
+		this._userDoctor = user_doctor;
+		this._docPatient = id_doc_patient;
+		this._startTime = start_time;
 		this._endTime = undefined;
 		this._description = "";
 		this._state = "pending";
 		this._cancellationReason = "";
 	}
 
-	getIdDoctor() {
-		return this._idDoctor;
+	getUserDoctor() {
+		return this._userDoctor;
 	}
 
-	getIdPatient() {
-		return this._idPatient;
+	getDocumentPatient() {
+		return this._docPatient;
 	}
 
 	getStartTime() {
-		return this._startTime;
+		return format(this._startTime, "DD/MM [at] HH:mm");
 	}
 
 	getEndTime() {
-		return this._endTime;
+		return format(this._endTime, "DD/MM [at] HH:mm");
 	}
 
 	setEndTime(endDateTime) {

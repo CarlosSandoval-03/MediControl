@@ -1,0 +1,66 @@
+<div class="row register-form">
+	<div class="col-md-8 offset-md-2">
+		<form class="custom-form" action="/user/newAppointment" method="POST">
+			<h1>Agenda tu cita</h1>
+			<div class="row form-group">
+				<div class="col-sm-4 label-column">
+					<label class="col-form-label" for="id_value_appointment">Numero de
+						documento</label>
+				</div>
+				<div class="col-sm-6 input-column">
+					<input
+						class="form-control"
+						type="text"
+						id="id_value_appointment"
+						name="id_value"
+						autofocus
+						required
+					/>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-sm-4 label-column">
+					<label class="col-form-label" for="dropdown-departament">Área de
+						especialidad
+					</label>
+				</div>
+				<div class="col-sm-4 input-column">
+					<div class="dropdown">
+						<select
+							name="departament"
+							id="dropdown-departament"
+							class="btn btn-light dropdown-toggle"
+						>
+							<option class="dropdown-item" value="medicina_general" selected>
+								Medicina General
+							</option>
+							<option class="dropdown-item" value="pediatria">
+								Pediatria
+							</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-sm-4 label-column">
+					<label class="col-form-label" for="appointment_date">Fecha para la
+						cita
+					</label>
+				</div>
+				<div class="col-sm-6 input-column">
+					<input
+						class="form-control"
+						name="date"
+						type="date"
+						id="appointment_date"
+						required
+					/>
+				</div>
+			</div>
+			<button class="btn btn-light submit-button" onclick="saveLocalStorage()">
+				Siguiente
+			</button>
+		</form>
+	</div>
+</div>
+{{{loadAppointmentFormScript}}}
