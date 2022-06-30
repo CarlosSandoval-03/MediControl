@@ -22,6 +22,7 @@ const {
 
 const pool = require("../database");
 
+// Main Route
 router.get("/", async (req, res) => {
 	const tickets = await getTickets("756.9728.0972.58", pool);
 
@@ -30,6 +31,7 @@ router.get("/", async (req, res) => {
 	res.render("user/patient/mainView", { stack: stackTickets });
 });
 
+// Ticket
 router.get("/newTicket", (req, res) => {
 	res.render("user/patient/ticket/generateTicket");
 });
@@ -55,6 +57,7 @@ router.get("/deleteTickets/:id", async (req, res) => {
 	res.redirect("/user/");
 });
 
+// Appointment
 router.get("/newAppointment", (req, res) => {
 	res.render("user/patient/appointment/firstForm");
 });
@@ -113,6 +116,12 @@ router.post("/createAppointment", async (req, res) => {
 
 	await pool.query("INSERT INTO appointments set ?", [newAppointment]);
 
+	res.redirect("/user/");
+});
+
+router.get("/deleteAppointment/:id", async (req, res) => {
+	const { id } = req.params;
+	await pool.query("DELETE FROM appointments WHERE id_appointment=?", [id]);
 	res.redirect("/user/");
 });
 
