@@ -33,6 +33,8 @@ router.get("/", async (req, res) => {
 			res.render("user/doctor/mainView", {
 				stack: stackTickets,
 				hash: hashPatients,
+				firstName: req.user.first_name,
+				lastName: req.user.last_name,
 			});
 		}
 	} else {
