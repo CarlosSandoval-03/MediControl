@@ -19,6 +19,7 @@ const {
 	generateAllTimeSlots,
 	generateValidHours,
 	saveDataAppointments,
+	getAllValidDepartaments,
 } = require("../Modules/AppointmentQuerys");
 
 const pool = require("../database");
@@ -110,8 +111,15 @@ router.get("/deleteTickets/:id", async (req, res) => {
 });
 
 // Appointment
-router.get("/newAppointment", (req, res) => {
-	res.render("user/patient/appointment/firstForm");
+router.get("/newAppointment", async (req, res) => {
+	const departamentObject = await getAllValidDepartaments(pool);
+
+	let departaments = [];
+	departamentObject.forEach((departament) => {
+		departaments.push(departament.department);
+	});
+
+	res.render("user/patient/appointment/firstForm", { departaments });
 });
 
 router.post("/newAppointment", (req, res) => {
@@ -131,7 +139,10 @@ router.get("/selectDoctor", async (req, res) => {
 
 	const listDoctors = saveDataDoctors(departamentDoctors);
 
-	res.render("user/patient/appointment/secondForm", { listDoctors });
+	res.render("user/patient/appointment/secondForm", {
+		listDoctors,
+		dep: req.query.departament,
+	});
 });
 
 router.post("/selectDoctor", (req, res) => {

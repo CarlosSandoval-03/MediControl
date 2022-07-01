@@ -1,0 +1,63 @@
+<div>
+	<div class="container-fluid" style="margin-bottom: 50px;">
+		<div
+			class="card"
+			id="TableSorterCard"
+			style="border-style: none;border-radius: 6.5px;"
+		>
+			<div
+				class="card-header py-3"
+				style="border-width: 0px;background: rgb(23,25,33);"
+			>
+				<div class="row table-topper align-items-center" id="contentTable">
+					{{#if stack.size}}
+						<div class="text-center" style="margin: 0px;padding: 5px 15px;">
+							<p class="m-0 fw-bold" style="color: rgb(255,255,255);">Tus
+								Tickets Pendientes</p>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div
+									class="table-responsive"
+									style="border-top-style: none;background: #171921;"
+								>
+									<table
+										class="table table-striped table tablesorter"
+										id="ipi-table"
+									>
+										<thead
+											class="thead-dark"
+											style="background: rgb(33,37,48);border-width: 0px;border-color: rgb(0,0,0);border-bottom-color: #21252F;"
+										>
+											<tr
+												style="border-style: none;border-color: rgba(255,255,255,0);background: #21252f;"
+											>
+												<th class="text-center">ID</th>
+												<th class="text-center">Fecha de Creacion</th>
+												<th class="text-center">Departamento</th>
+												<th
+													class="text-center filter-false sorter-false"
+												>Acciones</th>
+											</tr>
+										</thead>
+										<tbody class="text-center" style="border-top-width: 0px;">
+											<row>
+												{{{renderTableTickets stack}}}
+											</row>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					{{else}}
+						<div class="text-center" style="margin: 0px;padding: 5px 15px;">
+							<p class="m-2 fw-bold" style="color: rgb(255,255,255);">No tienes
+								ningun ticket de momento
+							</p>
+						</div>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

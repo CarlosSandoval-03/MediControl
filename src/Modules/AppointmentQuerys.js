@@ -71,9 +71,18 @@ const generateValidHours = (avl, queue) => {
 	return validHours;
 };
 
+const getAllValidDepartaments = async (pool) => {
+	const departaments = await pool.query(
+		`SELECT department FROM doctors GROUP BY department`
+	);
+
+	return departaments;
+};
+
 module.exports = {
 	getAllAppointmentsWithDoctor,
 	saveDataAppointments,
 	generateAllTimeSlots,
 	generateValidHours,
+	getAllValidDepartaments,
 };

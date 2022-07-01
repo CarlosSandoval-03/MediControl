@@ -135,4 +135,13 @@ helpers.loadScriptDatePicker = () => {
 	return `<script src="/js/register.js"></script>`;
 };
 
+helpers.formatOption = (value) => {
+	return value
+		.split("_")
+		.map((word) => {
+			return word.charAt(0).toUpperCase() + word.slice(1);
+		})
+		.join(" ");
+};
+
 module.exports = helpers;

@@ -15,12 +15,11 @@
 							id="dropdown-departament"
 							class="btn btn-light dropdown-toggle"
 						>
-							<option class="dropdown-item" value="medicina_general" selected>
-								Medicina General
-							</option>
-							<option class="dropdown-item" value="pediatria">
-								Pediatria
-							</option>
+							{{#each departaments}}
+								<option class="dropdown-item" value="{{this}}" selected>
+									{{formatOption this}}
+								</option>
+							{{/each}}
 						</select>
 					</div>
 				</div>
