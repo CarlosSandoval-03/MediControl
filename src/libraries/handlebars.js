@@ -135,4 +135,8 @@ helpers.renderTableAppointments = (hash) => {
 	return content;
 };
 
+helpers.loadScriptDatePicker = () => {
+	return `<script src="/js/register.js"></script>`;
+};
+
 module.exports = helpers;

@@ -3,13 +3,16 @@ const morgan = require("morgan");
 const { engine } = require("express-handlebars");
 const path = require("path");
 
+const session = require("express-session");
+const mysqlStore = require("express-mysql-session");
+
+const { database } = require("./keys");
+
+const passport = require("passport");
+
 // Initializations
 const app = express();
-
-// Global Variables
-app.use((req, res, next) => {
-	next();
-});
+const libPassport = require("./libraries/passport");
 
 // Public
 app.use(express.static(path.join(__dirname, "public")));
@@ -33,9 +36,19 @@ app.engine(
 app.set("view engine", ".hbs");
 
 // Middlewares
+app.use(
+	session({
+		secret: "userMedicontrol",
+		resave: false,
+		saveUninitialized: false,
+		store: new mysqlStore(database),
+	})
+);
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use(require("./routes/index"));
