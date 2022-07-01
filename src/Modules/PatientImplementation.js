@@ -8,7 +8,7 @@ const saveDataTickets = (tickets) => {
 			id: ticket.id_ticket,
 			idPatient: ticket.id_doc_patient,
 			dateCreation: ticket.date_creation,
-			departament: ticket.departament,
+			department: ticket.department,
 			priorityValue: ticket.priority_value,
 		};
 		let ticketObject = new Ticket(data);

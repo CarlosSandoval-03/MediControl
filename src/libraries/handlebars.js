@@ -27,7 +27,7 @@ helpers.renderTableTickets = (stackTickets) => {
 			${helpers.timeagoFormat(ticket.dateCreation)}
 		</td>
 		<td style="color: rgb(255,255,255);">
-			${helpers.capitalizeText(ticket.departament)}
+			${helpers.capitalizeText(ticket.department)}
 		</td>
 		<td class="text-center align-middle" style="max-height: 60px;height: 60px;">
 			<a class="btn btn-flat accent btnNoBorders checkboxHover" style="margin-bottom: 5px;" href="/user/deleteTickets/${
@@ -46,21 +46,21 @@ helpers.renderTableTickets = (stackTickets) => {
 
 helpers.createOptionsDoctors = (listDoctors) => {
 	let size = listDoctors.size;
-	let DoctorsDepartament = new Queue();
+	let DoctorsDepartment = new Queue();
 
 	for (let i = 0; i < size; i++) {
 		let doctor = listDoctors.topBack();
 
-		DoctorsDepartament.enqueue(doctor);
+		DoctorsDepartment.enqueue(doctor);
 
 		listDoctors.popBack();
 	}
 
 	let content = "";
-	size = DoctorsDepartament.size;
+	size = DoctorsDepartment.size;
 
 	for (let i = 0; i < size; i++) {
-		let doctor = DoctorsDepartament.dequeue();
+		let doctor = DoctorsDepartment.dequeue();
 		let option = `<option value="${doctor.getUsername().trim()}">${doctor
 			.getName()
 			.trim()}</option>`;

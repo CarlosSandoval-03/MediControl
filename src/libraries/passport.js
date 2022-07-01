@@ -80,7 +80,7 @@ passport.use(
 			passReqToCallback: true,
 		},
 		async (req, username, password, done) => {
-			const departamentFormatted = req.body.departament
+			const departmentFormatted = req.body.department
 				.toLowerCase()
 				.split(" ")
 				.join("_");
@@ -91,7 +91,7 @@ passport.use(
 				username,
 				password,
 				email: req.body.email,
-				department: departamentFormatted,
+				department: departmentFormatted,
 			};
 
 			newDoctor.password = await helpers.encryptPassword(password);

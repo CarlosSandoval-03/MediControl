@@ -23,7 +23,7 @@ class Patient {
 		this._username = username;
 		this._password = password;
 		this._email = email;
-		this._departament = departament;
+		this._department = department;
 		this._phone = phone;
 
 		this._appointments = new Queue();

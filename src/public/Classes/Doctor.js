@@ -9,7 +9,7 @@ class Doctor {
 		username,
 		password,
 		email,
-		departament,
+		department,
 	}) {
 		this._id = id;
 		this._firstName = firstName;
@@ -17,7 +17,7 @@ class Doctor {
 		this._username = username;
 		this._password = password;
 		this._email = email;
-		this._departament = departament;
+		this._department = department;
 		this._appointments = new AVL();
 	}
 
@@ -37,8 +37,8 @@ class Doctor {
 		return this._email;
 	}
 
-	getDepartament() {
-		return this._departament;
+	getDepartment() {
+		return this._department;
 	}
 
 	addAppointment({ patient, startDate }) {

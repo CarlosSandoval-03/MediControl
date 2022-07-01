@@ -10,7 +10,7 @@ const {
 
 const {
 	saveDataDoctors,
-	getDoctorsWithDepartament,
+	getDoctorsWithDepartment,
 	getDoctorWithUsername,
 } = require("../Modules/DoctorImplementation");
 
@@ -19,7 +19,7 @@ const {
 	generateAllTimeSlots,
 	generateValidHours,
 	saveDataAppointments,
-	getAllValidDepartaments,
+	getAllValidDepartments,
 } = require("../Modules/AppointmentQuerys");
 
 const pool = require("../database");
@@ -90,14 +90,14 @@ router.get("/newTicket", (req, res) => {
 });
 
 router.post("/createTicket", async (req, res) => {
-	const { departament } = req.body;
+	const { department } = req.body;
 
 	let priority;
-	departament === "urgencias" ? (priority = 1) : (priority = 2);
+	department === "urgencias" ? (priority = 1) : (priority = 2);
 
 	const newTicket = {
 		id_doc_patient: req.user.id_doc,
-		departament: departament,
+		department: department,
 		priority_value: priority,
 	};
 	await pool.query("INSERT INTO tickets set ?", [newTicket]);
@@ -112,36 +112,36 @@ router.get("/deleteTickets/:id", async (req, res) => {
 
 // Appointment
 router.get("/newAppointment", async (req, res) => {
-	const departamentObject = await getAllValidDepartaments(pool);
+	const departmentObject = await getAllValidDepartments(pool);
 
-	let departaments = [];
-	departamentObject.forEach((departament) => {
-		departaments.push(departament.department);
+	let departments = [];
+	departmentObject.forEach((department) => {
+		departments.push(department.department);
 	});
 
-	res.render("user/patient/appointment/firstForm", { departaments });
+	res.render("user/patient/appointment/firstForm", { departments });
 });
 
 router.post("/newAppointment", (req, res) => {
 	res.redirect(
-		"/user/selectDoctor/?departament=" +
-			req.body.departament +
+		"/user/selectDoctor/?department=" +
+			req.body.department +
 			"&date=" +
 			req.body.date
 	);
 });
 
 router.get("/selectDoctor", async (req, res) => {
-	const departamentDoctors = await getDoctorsWithDepartament(
-		req.query.departament,
+	const departmentDoctors = await getDoctorsWithDepartment(
+		req.query.department,
 		pool
 	);
 
-	const listDoctors = saveDataDoctors(departamentDoctors);
+	const listDoctors = saveDataDoctors(departmentDoctors);
 
 	res.render("user/patient/appointment/secondForm", {
 		listDoctors,
-		dep: req.query.departament,
+		dep: req.query.department,
 	});
 });
 

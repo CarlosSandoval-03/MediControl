@@ -7,9 +7,9 @@ const getAllDoctors = async (pool) => {
 	return doctors;
 };
 
-const getDoctorsWithDepartament = async (departament, pool) => {
+const getDoctorsWithDepartment = async (department, pool) => {
 	const doctors = await pool.query("SELECT * FROM doctors WHERE department=?", [
-		departament,
+		department,
 	]);
 
 	return doctors;
@@ -34,7 +34,7 @@ const saveDataDoctors = (doctors) => {
 			username: doctor.username,
 			password: doctor.password,
 			email: doctor.email,
-			departament: doctor.department,
+			department: doctor.department,
 		};
 		let doctorObject = new Doctor(doctorData);
 
@@ -44,7 +44,7 @@ const saveDataDoctors = (doctors) => {
 };
 
 module.exports = {
-	getDoctorsWithDepartament,
+	getDoctorsWithDepartment,
 	getAllDoctors,
 	saveDataDoctors,
 	getDoctorWithUsername,
