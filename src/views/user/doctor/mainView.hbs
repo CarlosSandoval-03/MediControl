@@ -1,0 +1,145 @@
+<div id="mainViewContent">
+	<nav class="navbar navbar-dark navbar-expand bg-dark sb-topnav">
+		<div class="container-fluid">
+			<button
+				class="btn btn-link btn-sm link-light order-md-1"
+				id="sidebarToggle"
+				onclick="toggleSidebar()"
+			>
+				<i class="fa fa-bars" style="font-size: 20px"></i></button>
+			<form
+				class="d-none d-md-inline-block order-2 ms-auto mr-0 me-md-3 my-2 my-md-0"
+			>
+			</form>
+			<ul class="navbar-nav d-flex order-3 ms-auto ml-md-0">
+				<li
+					class="nav-item d-flex d-sm-flex d-md-none justify-content-center align-items-center justify-content-sm-center"
+					style="margin-right: 7px"
+				>
+				</li>
+				<li class="nav-item d-flex justify-content-center align-items-center">
+					<div class="nav-item dropdown no-arrow">
+						<a
+							class="dropdown-toggle active"
+							aria-expanded="false"
+							data-bs-toggle="dropdown"
+							href="#"
+						>&nbsp;
+							<img
+									class="rounded-circle"
+									src="/img/user.jpg"
+									style="width: 40px; border-width: 2px; border-style: solid"
+								/>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-end text-start shadow"
+							style="margin-top: 16px"
+						>
+							<a class="dropdown-item" href="/user/closeSession">Log Out</a>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_nav">
+			<div id="sidenavAccordion" class="sb-sidenav accordion sb-sidenav-dark">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div>
+							<div class="sb-sidenav-menu-heading">
+								<span>Administre su perfil</span>
+							</div>
+							<a class="nav-link collapsed" href="#">
+								<div class="sb-nav-link-icon">
+									<i class="fa fa-desktop"></i>
+								</div>
+								<span>Dashboard</span>
+							</a>
+						</div>
+						<div>
+							<div class="sb-sidenav-menu-heading">
+								<span>Administre sus servicios</span>
+							</div>
+							<div>
+							<a class="nav-link collapsed" href="/user/newTicket">
+								<div class="sb-nav-link-icon">
+									<i class="fa fa-ticket"></i>
+								</div>
+								<span>Solicitar Turno</span>
+							</a>
+						</div>
+							<a
+								class="nav-link collapsed"
+								href="#"
+								aria-expanded="false"
+								aria-controls="collapseAppointments"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseAppointments"
+							>
+								<div class="sb-nav-link-icon">
+									<i class="fa fa-calendar-check"></i>
+								</div>
+								<span>Citas</span>
+								<div class="sb-sidenav-collapse-arrow">
+									<i class="fa fa-angle-down"></i>
+								</div>
+							</a>
+							<div
+								id="collapseAppointments"
+								class="collapse"
+								aria-labelledby="headingOne"
+								data-bs-parent="#sidenavAccordion"
+							>
+								<div class="sb-sidenav-menu-nested nav">
+									<a class="nav-link" href="/user/newAppointment">Nueva Cita</a><a
+										class="nav-link"
+										href="/user/removeAppointment"
+									>Cancelar Cita</a>
+								</div>
+							</div>
+							<a
+								class="nav-link collapsed"
+								href="#"
+								aria-expanded="false"
+								aria-controls="collapseMedicaments"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseMedicaments"
+							>
+								<div class="sb-nav-link-icon">
+									<i class="fa fa-medkit"></i>
+								</div>
+								<span>Medicamentos</span>
+								<div class="sb-sidenav-collapse-arrow">
+									<i class="fa fa-angle-down"></i>
+								</div>
+							</a>
+							<div
+								id="collapseMedicaments"
+								class="collapse"
+								aria-labelledby="headingOne"
+								data-bs-parent="#sidenavAccordion"
+							>
+								<div class="sb-sidenav-menu-nested nav">
+									<a class="nav-link" href="/user/newTicket/">Solicitar turno en farmacia</a><a
+										class="nav-link"
+										href="/user/medicaments"
+									>Ver medicamentos pendientes</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="sb-sidenav-footer">
+					<div class="small"><span>Logged as : NOMBRE_DOCTOR</span></div>
+				</div>
+			</div>
+		</div>
+		<div id="layoutSidenav_content">
+			<main>
+				{{> doctorContent}}
+			</main>
+		</div>
+	</div>
+</div>

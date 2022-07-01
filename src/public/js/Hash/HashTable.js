@@ -4,7 +4,7 @@ class HashTable {
 		this.elements = 0;
 		this.list = [];
 
-		for (let i = 0; i < size; i++) {
+		for (let i = 0; i < this.size; i++) {
 			this.list.push([]);
 		}
 	}
@@ -32,7 +32,7 @@ class HashTable {
 	hash(data) {
 		let n = 0;
 		for (let i = 0; i < 4; i++) {
-			n += data.charCodeAt(i);
+			n += data.id_doc.charCodeAt(i);
 		}
 		return n % this.size;
 	}
@@ -49,6 +49,7 @@ class HashTable {
 
 	insert(data) {
 		let pos = this.hash(data);
+
 		this.list[pos].push(data);
 		this.elements++;
 		this.updateTableSize();
@@ -56,9 +57,27 @@ class HashTable {
 
 	remove(data) {
 		let pos = this.hash(data);
-		while (data in this.list[pos]) {
+
+		while (this.list[pos].includes(data)) {
 			this.list[pos].splice(this.list[pos].indexOf(data), 1);
-			this.elements--;
 		}
+	}
+
+	print() {
+		let string = "";
+
+		for (let i = 0; i < this.size; i++) {
+			if (this.list[i].length === 0) {
+				string += "[]";
+			} else {
+				string += `['${this.list[i].join("', '")}']`;
+			}
+
+			if (i < this.size - 1) {
+				string += ", ";
+			}
+		}
+
+		return `{${string}}`;
 	}
 }

@@ -101,4 +101,38 @@ helpers.loadCanvas = () => {
 	<script src="/js/modal.js"></script>`;
 };
 
+helpers.renderTableAppointments = (hash) => {
+	let content = "";
+
+	let hashTable = hash.list;
+
+	for (let key of hashTable) {
+		if (key.length > 0) {
+			for (let patient of key) {
+				content += `
+				<tr style="background: #262a38;">
+					<td style="color: rgb(255,255,255);">${patient.first_name}</td>
+					<td style="color: rgb(255,255,255);">${patient.last_name}</td>
+					<td style="color: rgb(255,255,255);">${
+						helpers.timeagoFormat(patient.birt_date).split(" ")[0]
+					}</td>
+					<td
+						class="text-center align-middle"
+						style="max-height: 60px;height: 60px;"
+					>
+						<a
+							class="btn btn-flat accent btnNoBorders checkboxHover"
+							href="/doctor/endAppointment/${patient.id_doc}"
+						>
+							<i class="far fa-eye" style="color: #00bdff;"></i>
+						</a>
+					</td>
+				</tr>`;
+			}
+		}
+	}
+
+	return content;
+};
+
 module.exports = helpers;

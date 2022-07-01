@@ -32,7 +32,7 @@ class HashTable {
 	hash(data) {
 		let n = 0;
 		for (let i = 0; i < 4; i++) {
-			n += data.charCodeAt(i);
+			n += data.id_doc.charCodeAt(i);
 		}
 		return n % this.size;
 	}

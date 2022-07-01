@@ -1,6 +1,5 @@
 const Stack = require("../public/Structures/Implementations/Lineal/Stack");
 const Ticket = require("../public/Classes/Ticket");
-const Appointment = require("../public/Classes/Appointment");
 
 const saveDataTickets = (tickets) => {
 	let stack = new Stack();
