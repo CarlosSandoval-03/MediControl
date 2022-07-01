@@ -4,7 +4,6 @@ const { format } = require("fecha");
 
 const {
 	getTickets,
-	getPatientWithId,
 	saveDataTickets,
 	getAllAppointmentsWithId,
 } = require("../Modules/PatientImplementation");
@@ -26,36 +25,42 @@ const pool = require("../database");
 
 // Main Route
 router.get("/", async (req, res) => {
-	const idPatient = "756.9728.0972.58";
+	if (req.user) {
+		const idPatient = req.user.id_patient;
+		if (idPatient === undefined) {
+			res.redirect("/doctor");
+		} else {
+			const tickets = await getTickets(req.user.id_doc, pool);
+			const stackTickets = saveDataTickets(tickets);
 
-	const tickets = await getTickets(idPatient, pool);
-	const stackTickets = saveDataTickets(tickets);
-
-	res.render("user/patient/mainView", {
-		stack: stackTickets,
-	});
+			res.render("user/patient/mainView", {
+				stack: stackTickets,
+				firstName: req.user.first_name,
+				lastName: req.user.last_name,
+			});
+		}
+	} else {
+		res.redirect("/login/");
+	}
 });
 
 router.get("/data/graph", async (req, res) => {
-	const idPatient = "756.9728.0972.58";
+	const idPatient = req.user.id_doc;
 
 	const appointmets = await getAllAppointmentsWithId(idPatient, pool);
-	const patient = await getPatientWithId(idPatient, pool);
-
-	const temp = patient[0];
 
 	let data = {
 		patient: {
-			id_patient: temp.id_patient,
-			first_name: temp.first_name,
-			last_name: temp.last_name,
-			birt_date: temp.birt_date,
-			desc_patient: temp.desc_patient,
-			id_doc: temp.id_doc,
-			username: temp.username,
-			password: temp.password,
-			email: temp.email,
-			phone: temp.phone,
+			id_patient: req.user.id_patient,
+			first_name: req.user.first_name,
+			last_name: req.user.last_name,
+			birt_date: req.user.birt_date,
+			desc_patient: req.user.desc_patient,
+			id_doc: req.user.id_doc,
+			username: req.user.username,
+			password: req.user.password,
+			email: req.user.email,
+			phone: req.user.phone,
 		},
 	};
 
@@ -84,13 +89,13 @@ router.get("/newTicket", (req, res) => {
 });
 
 router.post("/createTicket", async (req, res) => {
-	const { id_value, departament } = req.body;
+	const { departament } = req.body;
 
 	let priority;
 	departament === "urgencias" ? (priority = 1) : (priority = 2);
 
 	const newTicket = {
-		id_doc_patient: id_value,
+		id_doc_patient: req.user.id_doc,
 		departament: departament,
 		priority_value: priority,
 	};
@@ -110,7 +115,12 @@ router.get("/newAppointment", (req, res) => {
 });
 
 router.post("/newAppointment", (req, res) => {
-	res.redirect("/user/selectDoctor/?departament=" + req.body.departament);
+	res.redirect(
+		"/user/selectDoctor/?departament=" +
+			req.body.departament +
+			"&date=" +
+			req.body.date
+	);
 });
 
 router.get("/selectDoctor", async (req, res) => {
@@ -157,7 +167,7 @@ router.get("/selectHour", async (req, res) => {
 router.post("/createAppointment", async (req, res) => {
 	let newAppointment = {
 		user_doctor: req.body.doctor,
-		id_doc_patient: req.body.id_value,
+		id_doc_patient: req.user.id_doc,
 		start_time: req.body.date + " " + req.body.hour + ":00",
 	};
 

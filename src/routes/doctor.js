@@ -14,19 +14,30 @@ const { saveDataTickets } = require("../Modules/PatientImplementation");
 const pool = require("../database");
 
 router.get("/", async (req, res) => {
-	const usernameDoctor = "rhomann";
+	if (req.user) {
+		if (req.user.department === undefined) {
+			res.redirect("/user/");
+		} else {
+			const usernameDoctor = req.user.username;
 
-	const tickets = await getTickets(pool);
-	const stackTickets = saveDataTickets(tickets);
+			const tickets = await getTickets(pool);
+			const stackTickets = saveDataTickets(tickets);
 
-	const appointments = await getAllAppointments(usernameDoctor, pool);
-	const patientsData = await getPatientsFromAppointments(appointments, pool);
-	const hashPatients = hashPatientsWithDoc(patientsData);
+			const appointments = await getAllAppointments(usernameDoctor, pool);
+			const patientsData = await getPatientsFromAppointments(
+				appointments,
+				pool
+			);
+			const hashPatients = hashPatientsWithDoc(patientsData);
 
-	res.render("user/doctor/mainView", {
-		stack: stackTickets,
-		hash: hashPatients,
-	});
+			res.render("user/doctor/mainView", {
+				stack: stackTickets,
+				hash: hashPatients,
+			});
+		}
+	} else {
+		res.redirect("/login/");
+	}
 });
 
 router.get("/endAppointment/:id", async (req, res) => {

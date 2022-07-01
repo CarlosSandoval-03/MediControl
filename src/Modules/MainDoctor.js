@@ -30,6 +30,8 @@ const getPatientsFromAppointments = async (appointments, pool) => {
 		}
 	});
 
+	if (patientsDocs.length === 0) return [];
+
 	const patients = await pool.query(
 		`SELECT * FROM patients WHERE id_doc IN (${patientsDocs.join(", ")});`
 	);

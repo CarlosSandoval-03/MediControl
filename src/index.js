@@ -56,6 +56,11 @@ app.use(require("./routes/authentication"));
 app.use("/user", require("./routes/patient"));
 app.use("/doctor", require("./routes/doctor"));
 
+// Global variables
+app.use((req, res, next) => {
+	app.locals.user = req.user;
+});
+
 // Start Server
 app.listen(app.get("port"), () => {
 	console.log(`Server on port ${app.get("port")}`);

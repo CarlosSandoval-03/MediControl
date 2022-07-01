@@ -1,9 +1,5 @@
 const { format } = require("timeago.js");
 const Queue = require("../public/Structures/Implementations/Lineal/Queue");
-const Stack = require("../public/Structures/Implementations/Lineal/Stack");
-
-const Appointment = require("../public/Classes/Appointment");
-const Patient = require("../public/Classes/Patient");
 
 const helpers = {};
 

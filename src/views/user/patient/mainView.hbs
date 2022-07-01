@@ -35,7 +35,7 @@
 							class="dropdown-menu dropdown-menu-end text-start shadow"
 							style="margin-top: 16px"
 						>
-							<a class="dropdown-item" href="/user/closeSession">Log Out</a>
+							<a class="dropdown-item" href="/logout">Log Out</a>
 						</div>
 					</div>
 				</li>
@@ -51,7 +51,7 @@
 							<div class="sb-sidenav-menu-heading">
 								<span>Administre su perfil</span>
 							</div>
-							<a class="nav-link collapsed" href="#">
+							<a class="nav-link collapsed" href="/user/">
 								<div class="sb-nav-link-icon">
 									<i class="fa fa-desktop"></i>
 								</div>
@@ -93,46 +93,14 @@
 								data-bs-parent="#sidenavAccordion"
 							>
 								<div class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="/user/newAppointment">Nueva Cita</a><a
-										class="nav-link"
-										href="/user/removeAppointment"
-									>Cancelar Cita</a>
-								</div>
-							</div>
-							<a
-								class="nav-link collapsed"
-								href="#"
-								aria-expanded="false"
-								aria-controls="collapseMedicaments"
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseMedicaments"
-							>
-								<div class="sb-nav-link-icon">
-									<i class="fa fa-medkit"></i>
-								</div>
-								<span>Medicamentos</span>
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fa fa-angle-down"></i>
-								</div>
-							</a>
-							<div
-								id="collapseMedicaments"
-								class="collapse"
-								aria-labelledby="headingOne"
-								data-bs-parent="#sidenavAccordion"
-							>
-								<div class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="/user/newTicket/">Solicitar turno en farmacia</a><a
-										class="nav-link"
-										href="/user/medicaments"
-									>Ver medicamentos pendientes</a>
+									<a class="nav-link" href="/user/newAppointment">Nueva Cita</a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">
-					<div class="small"><span>Logged as : NOMBRE_PACIENTE</span></div>
+					<div class="medium"><span>Logged as: {{firstName}} {{lastName}}</span></div>
 				</div>
 			</div>
 		</div>

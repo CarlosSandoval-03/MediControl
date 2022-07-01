@@ -9,7 +9,7 @@ helpers.encryptPassword = async (password) => {
 };
 
 helpers.matchPassword = async (password, hash) => {
-	await bcrypt.compare(password, hash);
+	return await bcrypt.compare(password, hash);
 };
 
 module.exports = helpers;
